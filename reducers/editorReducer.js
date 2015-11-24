@@ -5,7 +5,7 @@ const INITIAL_STATE = Map({
     content: Map({blocks: Map({
         textBlock1: {
             content: {
-                text: "sdf"
+                text: ""
             },
             eventsDelegator: Map({
                 newBlockPending: false
