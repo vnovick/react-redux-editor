@@ -1,11 +1,7 @@
 import {Map, List} from 'immutable';
 import { appActionTypes } from 'constants/actionTypes';
 
-const INITIAL_STATE = Map({
-    editor: Map({
-        actions: List.of('write', 'read')
-    })
-});
+const INITIAL_STATE = Map();
 
 function setState(state, newState) {
     return state.merge(newState);
