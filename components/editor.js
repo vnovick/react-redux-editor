@@ -35,7 +35,7 @@ export const Editor = class Editor extends React.Component {
     render() {
         return (
           <section className={this.props.className}>
-            <h1 className="title">Sir Trevor Editor</h1>
+            <h1 className="title">In House Editor</h1>
             <EditorUiPanel ref="uiPanel"></EditorUiPanel>
             {this.getContentPanesForEachBlock()}
           </section>
