@@ -1,10 +1,14 @@
 import { editorActionTypes } from 'constants/actionTypes';
+import { parse } from 'markdown-to-ast';
 import { Map } from 'immutable';
 
-export const newTextBlock = (store) => {
-    window.SirTrevor.block_controls.$el.children('a.st-block-control').first().click();
+export const newTextBlock = _ => {
+    window.SirTrevor.block_controls.$el.children('a.st-block-control[data-type="text"]').click();
 }
 
+export const newImageBlock = _ => {
+    window.SirTrevor.block_controls.$el.children('a.st-block-control[data-type="image"]').click();
+}
 
 export const contentUpdate = (store, content, blockId) => {
     store.dispatch({
@@ -20,16 +24,11 @@ export const contentUpdate = (store, content, blockId) => {
 
 function attachCustomListenes(store, trevorEvent){
     trevorEvent.text_block.bind('blur keyup paste copy cut', (e) => {
-        if (e.keyCode === 13) {
-            newTextBlock();
-        }
-        contentUpdate(store, window.ST.toMarkdown(e.target.innerHTML.replace(/(<\/p>|<p>|<br>)/g, '')), trevorEvent.blockID)
+        contentUpdate(store, parse(window.ST.toMarkdown(e.target.innerHTML)), trevorEvent.blockID)
     });
     trevorEvent.text_block.keyup(function (e){
         if(+e.target.dataset.prevCarretPosition === 0 && e.keyCode === 8){
-            console.log("delete block", e.target.dataset.prevCarretPosition);
-            trevorEvent.$ui.children('.st-block-ui-btn--delete').click();
-            trevorEvent.$inner.children('.st-block__ui-delete-controls').children('.st-block-ui-btn--confirm-delete').click();
+            deleteBlock(trevorEvent, blockID);
         }
     })
     trevorEvent.text_block.keydown(function (e){
@@ -37,6 +36,8 @@ function attachCustomListenes(store, trevorEvent){
         e.target.dataset.prevCarretPosition = e.target.dataset.prevCarretPosition !== carretPosition ? carretPosition : e.target.dataset.prevCarretPosition;
     })
 }
+
+export const deleteBlock = (store, trevorEvent) => {}
 
 export const newBlock = (store, trevorEvent) => {
     attachCustomListenes(store, trevorEvent);

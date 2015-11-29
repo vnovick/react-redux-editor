@@ -5,7 +5,6 @@ const INITIAL_STATE = Map({
     content: Map({blocks: Map()})
 });
 
-
 function setState(currentState, newState, blockId) {
     return currentState.updateIn(['content', 'blocks', blockId ], blocks => newState);
 }
