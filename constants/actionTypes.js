@@ -3,6 +3,7 @@ export const appActionTypes = {
 };
 
 export const editorActionTypes = {
+    EDITOR_SET_STATE: 'EDITOR_SET_STATE',
     EDITOR_CONTENT_CHANGE: 'EDITOR_CONTENT_CHANGE',
     EDITOR_NEW_BLOCK: 'EDITOR_NEW_BLOCK',
     EDITOR_SPLIT_CONTENT: 'EDITOR_SPLIT_CONTENT'

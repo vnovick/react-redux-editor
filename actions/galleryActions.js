@@ -1,7 +1,7 @@
 import { galleryActionTypes,  } from 'constants/actionTypes';
 import { fromJS, Map, List } from 'immutable';
 export const dragEnd = (store, event) => {
-    store.getState().app.getIn(['editor', 'editorClass']).block_manager.blocks.map( block => {
+    store.getState().editor.getIn(['editor', 'editorClass']).block_manager.blocks.map( block => {
         Array.from(block.$editor[0].children)
             .map( element => {
                 element.className = "";
@@ -23,7 +23,7 @@ export const updateGalleryImageList = (store, results) => {
 
 export const dragStart = (store, image) => {
     let listenersArray = [];
-    store.getState().app.getIn(['editor', 'editorClass']).block_manager.blocks.map( block => {
+    store.getState().editor.getIn(['editor', 'editorClass']).block_manager.blocks.map( block => {
         Array.from(block.$editor[0].children)
             .filter( element => element.textContent.length === 0 )
             .map( element => {

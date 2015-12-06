@@ -22,6 +22,13 @@ export const editorDropAction = (store, element, container) => {
     }
 }
 
+export const setEditorState = (store, state) => {
+    store.dispatch({
+        type: editorActionTypes.EDITOR_SET_STATE,
+        state
+    })
+}
+
 export const newTextBlock = (controls) => {
     if (!controls){
         window.SirTrevor.block_controls.$el.children('a.st-block-control[data-type="text"]').click();
@@ -52,7 +59,7 @@ export const contentUpdate = (store, content, blockId) => {
     Array.from(content.children).map( element => {
         element.className = "";
     })
-    let parsedContent = parse(store.getState().app.getIn(['editor', 'instance']).toMarkdown(content.innerHTML));
+    let parsedContent = parse(store.getState().editor.getIn(['editor', 'instance']).toMarkdown(content.innerHTML));
     store.dispatch({
         type: editorActionTypes.EDITOR_CONTENT_CHANGE,
         state: Map({

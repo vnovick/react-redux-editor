@@ -23,12 +23,18 @@ function addBlockToState(currentState, newState, blockId) {
     }
 }
 
+function setState(currentState, newState) {
+    return currentState.merge(newState);
+}
+
 function splitBlock(currentState, newState) {
     return currentState.merge(newState)
 }
 
 export default function(state = INITIAL_STATE, action) {
     switch (action.type) {
+    case editorActionTypes.EDITOR_SET_STATE:
+        return setState(state, action.state)
     case editorActionTypes.EDITOR_CONTENT_CHANGE:
         return changeContent(state, action.state, action.blockId);
     case editorActionTypes.EDITOR_NEW_BLOCK:
