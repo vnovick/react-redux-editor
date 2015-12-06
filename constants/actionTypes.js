@@ -4,8 +4,8 @@ export const appActionTypes = {
 
 export const editorActionTypes = {
     EDITOR_CONTENT_CHANGE: 'EDITOR_CONTENT_CHANGE',
-    EDITOR_NEW_BLOCK: 'EDITOR_NEW_BLOCK',
-    EDITOR_SPLIT_CONTENT: 'EDITOR_SPLIT_CONTENT'
+    EDITOR_SET_STATE: 'EDITOR_SET_STATE',
+    EDITOR_NEW_BLOCK: 'EDITOR_NEW_BLOCK'
 };
 
 export const galleryActionTypes = {

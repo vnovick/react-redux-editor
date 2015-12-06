@@ -1,26 +1,31 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import sirTrevorFactory from 'core/sirTrevorFactory';
-import { newTextBlock, editorDropAction } from 'actions/editorActions';
-
+import { newBlock, contentUpdate, setEditorState } from 'actions/editorActions';
+import Quill from 'quill';
 export const Editor = class Editor extends React.Component {
 
     componentDidMount(){
-        sirTrevorFactory.getInstance(this.props.store, this.refs.wysiwyg);
-        newTextBlock();
+        let { dispatch } = this.props;
+        let editor = new Quill('#editor');
+        dispatch(setEditorState({
+            instance: editor
+        }))
+        editor.on('text-change', (delta, source)=>{
+            if (delta.ops[1] && delta.ops[1].insert && delta.ops[1].insert.charCodeAt && delta.ops[1].insert.charCodeAt(0) === 10) {
+                dispatch(newBlock(delta));
+            }
+            else {
+                dispatch(contentUpdate(delta));
+            }
+        });
     }
 
-    onDrop(ev){
-        editorDropAction(this.props.store, ev.target, ev.target.parentElement)
-    }
 
     render() {
         return (
-          <section className={this.props.className} onDragOver={this.preventDefault} onDrop={this.onDrop.bind(this)}>
-            <h1 className="title">Sir Trevor Editor</h1>
-            <form className="editor">
-                <textarea ref="wysiwyg" className="js-st-instance"></textarea>
-            </form>
+          <section className={this.props.className}>
+            <h1 className="title">Quill Editor</h1>
+            <div ref="editor" id="editor"/>
           </section>
         )
     }

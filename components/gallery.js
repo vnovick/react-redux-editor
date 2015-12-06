@@ -24,7 +24,7 @@ export const Gallery = class Editor extends React.Component {
     get getImageList(){
         return this.props.images.map((imageObject, index) => {
             let image = imageObject.toJS().tbUrl;
-            return  <img key={index} className="draggable-image" draggable="true" src={image} onDragStart={this.dragStart.bind(this)} onDragEnd={this.onDrop.bind(this)}/>
+            return  <img key={index} className="draggable-image" src={image} />
         });
     }
     render() {
