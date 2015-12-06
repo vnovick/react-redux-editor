@@ -1,4 +1,5 @@
 import thunk from 'redux-thunk';
+import multi from 'redux-multi';
 import { createStore, compose, applyMiddleware, } from 'redux';
 import createLogger from 'redux-logger';
 import { Map, Iterable } from 'immutable';

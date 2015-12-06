@@ -1,17 +1,36 @@
 .editor {
   padding: 2rem;
   justify-content: flex-start;
-  .st-block-controls__top {
-    display: none;
-  }
-  .st-block::after{
-    display: none;
-  }
+  // .st-block-controls__top {
+  //   display: none;
+  // }
+  // .st-block::after{
+  //   display: none;
+  // }
   .st-block__inner {
     padding: 0;
     border: 0;
+    .st-block__messages {
+      display: none;
+    }
+    // .st-block__ui {
+    //   display: none;
+    // }
     .st-text-block {
+      .dropContainer {
+        border: 1px dashed rgba(1,1,1,.5);
+        &:hover {
+          content: "Drop here";
+          text-align: center;
+        }
+      }
       padding: 0;
     }
+  }
+  .st-block__ui, .st-block__ui-delete-controls {
+      position: absolute;
+      bottom: -56px;
+      right: 0px;
+      opacity: 0;
   }
 }

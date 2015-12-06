@@ -1,31 +1,39 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { dragEnd, dragStart } from 'actions/galleryActions'
+import {  dragStart, updateGalleryImageList, dragEnd } from 'actions/galleryActions'
+import jsonp from 'jsonp';
 export const Gallery = class Editor extends React.Component {
 
     componentDidMount(){
-        google.load('search', '1');
-        function initialize() {
-            var searchControl = new google.search.SearchControl();
-            searchControl.addSearcher(new google.search.ImageSearch());
-            searchControl.addSearcher(new google.search.VideoSearch());
-            searchControl.draw(document.getElementById("searchcontrol"));
-        }
-        google.setOnLoadCallback(initialize);
+            updateGalleryImageList(this.props.store, [{
+              tbUrl: 'http://i1.manchestereveningnews.co.uk/incoming/article9882472.ece/ALTERNATES/s1227b/JS70280311.jpg'
+            },{
+              tbUrl: 'http://www.tsmplug.com/wp-content/uploads/2013/08/Arsenal+Salary+list+2014.jpg'
+            }]);
     }
 
     onDrop(e) {
-        dragEnd(this.props.store, e);
+        dragEnd(this.props.store)
     }
 
-    dragStart(e){
-        dragStart(this.props.store, e)
+    dragStart(event){
+        event.dataTransfer.setData('text', 'Dragging image')
+        dragStart(this.props.store, event.target.src);
+    }
+
+    get getImageList(){
+        return this.props.images.map((imageObject, index) => {
+            let image = imageObject.toJS().tbUrl;
+            return  <img key={index} className="draggable-image" draggable="true" src={image} onDragStart={this.dragStart.bind(this)} onDragEnd={this.onDrop.bind(this)}/>
+        });
     }
     render() {
         return (
-          <section className={this.props.className} onDragStart={this.dragStart.bind(this)} onDragEnd={this.onDrop.bind(this)}>
+          <section className={this.props.className}>
             <h1> Search For Videos or images</h1>
-            <div id="searchcontrol" className="card"></div>
+            <div id="gallery" className="card">
+              { this.getImageList }
+            </div>
           </section>
         )
     }
@@ -33,7 +41,7 @@ export const Gallery = class Editor extends React.Component {
 
 function mapStateToProps(state){
     return {
-        images: state.gallery.getIn(['images', 'responseData', 'results'])
+        images: state.gallery.getIn(['images'])
     };
 }
 
