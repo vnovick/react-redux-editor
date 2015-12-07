@@ -5,7 +5,7 @@ const INITIAL_STATE = Map({
 });
 
 function changeContent(currentState, newState) {
-    return currentState.updateIn(['content', 'blocks'], blocks => blocks.merge(newState));
+    return currentState.updateIn(['content', 'blocks'], blocks => newState);
 }
 
 function setEditorState(currentState, newState) {
