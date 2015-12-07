@@ -18,8 +18,8 @@ export default function(state = INITIAL_STATE, action) {
         return setEditorState(state, action.state)
     case editorActionTypes.EDITOR_CONTENT_CHANGE:
         return changeContent(state, action.state);
-    case editorActionTypes.EDITOR_DROP:
-        return editorDrop(state, action.state)
+    case editorActionTypes.EDITOR_IMAGE_INSERT:
+        return changeContent(state, action.state)
     }
     return state;
 }

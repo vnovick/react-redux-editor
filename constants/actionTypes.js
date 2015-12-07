@@ -5,7 +5,7 @@ export const appActionTypes = {
 export const editorActionTypes = {
     EDITOR_CONTENT_CHANGE: 'EDITOR_CONTENT_CHANGE',
     EDITOR_SET_STATE: 'EDITOR_SET_STATE',
-    EDITOR_NEW_BLOCK: 'EDITOR_NEW_BLOCK'
+    EDITOR_IMAGE_INSERT: 'EDITOR_IMAGE_INSERT'
 };
 
 export const galleryActionTypes = {

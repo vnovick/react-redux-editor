@@ -7,16 +7,12 @@ export const Editor = class Editor extends React.Component {
     componentDidMount(){
         let { dispatch } = this.props;
         let editor = new Quill('#editor');
+        window.editor = editor;
         dispatch(setEditorState({
             instance: editor
         }))
         editor.on('text-change', (delta, source)=>{
-            if (delta.ops[1] && delta.ops[1].insert && delta.ops[1].insert.charCodeAt && delta.ops[1].insert.charCodeAt(0) === 10) {
-                dispatch(newBlock(delta));
-            }
-            else {
-                dispatch(contentUpdate(delta));
-            }
+            dispatch(contentUpdate(delta));
         });
     }
 
