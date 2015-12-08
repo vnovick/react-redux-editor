@@ -14,6 +14,7 @@ applyMiddleware(thunk, createLogger({
         return Object.assign(Map(state).toJS(), { [Symbol("Immutable State")]: state });
     }
 }))
+// ,window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 
 export default createComposedStore(rootReducer);

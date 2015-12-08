@@ -8,7 +8,7 @@ export const contentUpdate = (delta, source) => (dispatch, getState) => {
     dispatch({
         type: editorActionTypes.EDITOR_CONTENT_CHANGE,
         state: editorInstance.editor.delta.ops.map( block => {
-            return typeof block.insert !== "number" ? {insert: block.insert.split(/\n{2,}/g), attributes: block.attributes} : block;
+            return typeof block.insert !== "number" ? {paragraphs: block.insert.split(/\n{2,}/g), attributes: block.attributes} : block;
         })
     })
 }
