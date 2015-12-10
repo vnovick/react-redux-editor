@@ -2,6 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {  updateGalleryImageList } from 'actions/galleryActions'
 import jsonp from 'jsonp';
+
+function dragStartHandler(event) {
+    return (e) => {
+        e.dataTransfer.setData("text/html", e.target.outerHTML);
+        e.dropEffect = "move";
+    }
+}
 export const Gallery = class Editor extends React.Component {
 
     componentDidMount(){
@@ -15,7 +22,7 @@ export const Gallery = class Editor extends React.Component {
     get getImageList(){
         return this.props.images.map((imageObject, index) => {
             let image = imageObject.toJS().tbUrl;
-            return <img key={index} className="draggable-image" src={image}/>
+            return <img key={index} className="draggable-image" src={image} onDragStart={dragStartHandler(event)}/>
         });
     }
     render() {
@@ -24,6 +31,9 @@ export const Gallery = class Editor extends React.Component {
             <h1> Search For Videos or images</h1>
             <div id="gallery" className="card">
               { this.getImageList }
+            </div>
+            <div className="card" draggable="false" >
+                <wrapperForEditor><iframe width="560" height="315" src="https://www.youtube.com/embed/Szm7JtD-54o" frameborder="0" allowfullscreen></iframe></wrapperForEditor>
             </div>
           </section>
         )

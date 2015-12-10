@@ -3,6 +3,20 @@ import {connect} from 'react-redux';
 import { pasteContent, contentUpdate, setEditorState } from 'actions/editorActions';
 import htmlToText from 'html-to-text';
 import Quill from 'quill';
+
+function allowDrop(event) {
+  return (e) => {
+      // e.preventDefault();
+      // console.log(e.dataTransfer);
+  }
+}
+
+function Drop() {
+  return (e) => {
+      // e.preventDefault();
+
+  }
+}
 export const Editor = class Editor extends React.Component {
 
     componentDidMount(){
@@ -11,7 +25,9 @@ export const Editor = class Editor extends React.Component {
             modules: {
                 'paste-manager': {
                     onConvert: (container)=> {
-                        container.innerHTML = htmlToText.fromString(container.innerHTML)
+                      debugger
+                        container.innerHTML = container.innerText
+                        // htmlToText.fromString(container.innerHTML)
                         dispatch(pasteContent(container.innerHTML))
                         return editor.modules['paste-manager']._onConvert(container);
                     }
@@ -32,7 +48,7 @@ export const Editor = class Editor extends React.Component {
         return (
           <section className={this.props.className}>
             <h1 className="title">Quill Editor</h1>
-            <div ref="editor" id="editor"/>
+            <div onDragOver={ allowDrop()} onDrop={ Drop() } ref="editor" id="editor"/>
           </section>
         )
     }
