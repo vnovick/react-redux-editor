@@ -15,7 +15,7 @@ function removeDraggingImage(currentState) {
 
 export default function(state = INITIAL_STATE, action) {
     switch (action.type) {
-    case galleryActionTypes.UPDATE_GALLERY_IMAGE_LIST:
+    case galleryActionTypes.FETCHED_PHOTOS:
         return setState(state, action.state);
     case galleryActionTypes.DRAG_STARTED:
         return setState(state, action.state);

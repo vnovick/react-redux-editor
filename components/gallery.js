@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {  updateGalleryImageList } from 'actions/galleryActions'
-import jsonp from 'jsonp';
+import { triggerPhotoFetch } from 'actions/galleryActions'
 
 function dragStartHandler(event) {
     return (e) => {
@@ -12,29 +11,26 @@ function dragStartHandler(event) {
 export const Gallery = class Editor extends React.Component {
 
     componentDidMount(){
-        updateGalleryImageList(this.props.store, [{
-            tbUrl: 'http://i1.manchestereveningnews.co.uk/incoming/article9882472.ece/ALTERNATES/s1227b/JS70280311.jpg'
-        }, {
-            tbUrl: 'http://www.tsmplug.com/wp-content/uploads/2013/08/Arsenal+Salary+list+2014.jpg'
-        }]);
+        const { dispatch } = this.props;
+        dispatch(triggerPhotoFetch());
     }
 
     get getImageList(){
         return this.props.images.map((imageObject, index) => {
-            let image = imageObject.toJS().tbUrl;
+            let image = imageObject.toJS().url_s;
             return <img key={index} className="draggable-image" src={image} onDragStart={dragStartHandler(event)}/>
         });
     }
     render() {
         return (
-          <section className={this.props.className}>
-            <h1> Search For Videos or images</h1>
-            <div id="gallery" className="card">
+          <section className={this.props.className} style={{ width: '25%' }}>
+            <h1 className="title"> Search For Videos or images</h1>
+            <div id="gallery">
               { this.getImageList }
             </div>
-            <div className="card" draggable="false" >
-                <wrapperForEditor><iframe width="560" height="315" src="https://www.youtube.com/embed/Szm7JtD-54o" frameborder="0" allowfullscreen></iframe></wrapperForEditor>
-            </div>
+            <wrapperForEditor>
+              <iframe src="https://www.youtube.com/embed/Szm7JtD-54o" width="100%" height="100%" frameBorder="0" allowFullScreen></iframe>
+            </wrapperForEditor>
           </section>
         )
     }

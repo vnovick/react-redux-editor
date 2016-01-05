@@ -46,7 +46,7 @@ export const Editor = class Editor extends React.Component {
 
     render() {
         return (
-          <section className={this.props.className}>
+          <section className={this.props.className} style={this.props.style}>
             <h1 className="title">Quill Editor</h1>
             <div onDragOver={ allowDrop()} onDrop={ Drop() } ref="editor" id="editor"/>
           </section>

@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+require("babel-polyfill");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     resolve: {
@@ -8,6 +9,7 @@ module.exports = {
     },
     entry: {
         app: [
+            "babel-polyfill",
             'webpack-dev-server/client?http://localhost:8080',
             './entry.js'
         ]

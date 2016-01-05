@@ -10,7 +10,8 @@ export const editorActionTypes = {
 };
 
 export const galleryActionTypes = {
-    UPDATE_GALLERY_IMAGE_LIST: 'UPDATE_GALLERY_IMAGE_LIST',
+    FETCHED_PHOTOS: 'FETCHED_PHOTOS',
+    FETCH_SAMPLE_PHOTOS: 'FETCH_SAMPLE_PHOTOS',
     DRAG_STARTED: 'DRAG_STARTED',
     DRAG_END: 'DRAG_END'
 };
